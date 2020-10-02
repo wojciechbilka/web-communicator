@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+<div class="container">
+    <h2>Create Account</h2>
+    <div class="form-group">
+        <form action="#" th:action="@{/saveUser}" th:object="${userDTO}" method="post">
+            <input type="text" class="form-control" th:field="*{userName}" placeholder="User Name" th:errorclass="is-invalid"><br>
+            <p class="text-danger mb-10" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"/>
+
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" th:field="*{password}" th:errorclass="is-invalid">
+            <ul>
+                <li th:each="err : ${#fields.errors('password')}" th:text="${err}" />
+            </ul>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+
+            <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" th:field="*{confirmPassword}" th:errorclass="is-invalid" aria-describedby="passwordHelpBlock">
+            <small id="passwordHelpBlock" class="form-text text-muted">
+                Your password must be 8-30 characters long, contain letters and numbers, at least one special character and uppercase letter, and must not contain spaces or emoji.
+            </small>
+            <p class="text-danger mb-10" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"/>
+
+            <input type="text" id="inputEmail" class="form-control" placeholder="Email" th:field="*{email}" th:errorclass="is-invalid">
+            <p class="text-danger mb-10" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+
+            <input type="text" id="inputConfirmEmail" class="form-control" placeholder="Confirm Email" th:field="*{confirmEmail}" th:errorclass="is-invalid">
+            <p class="text-danger mb-10" th:if="${#fields.hasErrors('confirmEmail')}" th:errors="*{confirmEmail}"/>
+
+            <input type="submit" th:value="Save" class="btn btn-info">
+        </form>
+    </div>
+</div>
+</body>
+</html>
